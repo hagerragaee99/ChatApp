@@ -4,8 +4,8 @@
 # This file should be version controlled and should not be manually edited.
 
 version:
-  revision: "fa31538d79f1a470ebc6767c70d0fda524e97ad3"
-  channel: "beta"
+  revision: "00b0c91f06209d9e4a41f71b7a512d6eb3b9c694"
+  channel: "stable"
 
 project_type: app
 
@@ -13,23 +13,23 @@ project_type: app
 migration:
   platforms:
     - platform: root
-      create_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
-      base_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
+      create_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
+      base_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
     - platform: android
-      create_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
-      base_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
+      create_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
+      base_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
     - platform: linux
-      create_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
-      base_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
+      create_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
+      base_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
     - platform: macos
-      create_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
-      base_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
+      create_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
+      base_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
     - platform: web
-      create_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
-      base_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
+      create_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
+      base_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
     - platform: windows
-      create_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
-      base_revision: fa31538d79f1a470ebc6767c70d0fda524e97ad3
+      create_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
+      base_revision: 00b0c91f06209d9e4a41f71b7a512d6eb3b9c694
 
   # User provided section
 

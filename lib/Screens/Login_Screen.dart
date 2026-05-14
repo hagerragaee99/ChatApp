@@ -1,76 +1,113 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: avoid_print, use_build_context_synchronously, unnecessary_null_comparison, must_be_immutable
 
+import 'package:cubitproject/Screens/Home_Screen.dart';
 import 'package:cubitproject/Screens/Register_Screen.dart';
+import 'package:cubitproject/Services/user_Service.dart';
 import 'package:cubitproject/Widgets/Custom_Button.dart';
+import 'package:cubitproject/Widgets/Custom_InkWellTextSpan.dart';
 import 'package:cubitproject/Widgets/Custom_TextFormField.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LoginScreen extends StatelessWidget {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class LoginScreen extends StatefulWidget {
+  static const String screenRoute = "Login_Screen";
 
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String emailController = '';
+  String passwordController = '';
+
+  bool _saving = false;
+
+  UserService userService = UserService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Form(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/icons8-chat-room-100.png',
-                  width: 120,
-                  fit: BoxFit.fill,
-                ),
-                Text(
-                  'Welcome Back to Chat App',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 95, 175, 241),
+      body: ModalProgressHUD(
+        inAsyncCall: _saving,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/icons8-chat-room-100.png',
+                    width: 120,
+                    fit: BoxFit.fill,
                   ),
-                ),
-                CustomTextformfield(hintText: 'Enter Your Email'),
-                CustomTextformfield(hintText: 'Enter Your Password'),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    'Forget Password?',
-                    style: TextStyle(color: Colors.white54, fontSize: 12),
-                  ),
-                ),
-                CustomButton(text: "Login"),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => RegisterScreen()),
-                    );
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Don't have an account? ",
-                          style: TextStyle(color: Colors.white54, fontSize: 12),
-                        ),
-                        TextSpan(
-                          text: "Sign Up",
-                          style: TextStyle(
-                            color: const Color.fromARGB(255, 95, 175, 241),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    'Welcome Back to Chat App',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 95, 175, 241),
                     ),
                   ),
-                ),
-              ],
+                  CustomTextformfield(
+                    hintText: 'Enter Your Email',
+                    onChanged: (value) {
+                      emailController = value;
+                    },
+                  ),
+                  CustomTextformfield(
+                    hintText: 'Enter Your Password',
+                    onChanged: (value) {
+                      passwordController = value;
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      'Forget Password?',
+                      style: TextStyle(color: Colors.white54, fontSize: 12),
+                    ),
+                  ),
+                  CustomButton(
+                    text: "Login",
+                    onPressed: () async {
+                      setState(() {
+                        _saving = true;
+                      });
+                      try {
+                        final user = await userService
+                            .signInWithEmailAndPassword(
+                              emailController,
+                              passwordController,
+                            );
+                        if (user != null) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  HomeScreen(currentUser: user),
+                            ),
+                            (route) => false,
+                          );
+                        }
+                        setState(() {
+                          _saving = false;
+                        });
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  ),
+                  CustomInkwelltextspan(
+                    screenRoute: RegisterScreen.screenRoute,
+                    text1: "Don't have an account? ",
+                    text2: "Sign Up",
+                  ),
+                ],
+              ),
             ),
           ),
         ),

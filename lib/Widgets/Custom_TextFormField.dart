@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class CustomTextformfield extends StatefulWidget {
   String? hintText;
-  CustomTextformfield({super.key, this.hintText});
+  Function(String)? onChanged;
+  CustomTextformfield({super.key, this.hintText, this.onChanged});
 
   @override
   State<CustomTextformfield> createState() => _CustomTextformfieldState();
@@ -18,7 +19,9 @@ class _CustomTextformfieldState extends State<CustomTextformfield> {
       padding: const EdgeInsets.only(top: 15.0),
       child: TextFormField(
         style: TextStyle(color: Colors.white, fontSize: 13),
-        onChanged: (value) {},
+        onChanged: (value) {
+          widget.onChanged?.call(value);
+        },
         obscuringCharacter: '*',
         obscureText:
             widget.hintText == 'Enter Your Password' ||

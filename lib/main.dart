@@ -1,5 +1,6 @@
 // ignore_for_file: annotate_overrides
 
+import 'package:cubitproject/Screens/Chat_Screen.dart';
 import 'package:cubitproject/Screens/Home_Screen.dart';
 import 'package:cubitproject/Screens/Login_Screen.dart';
 import 'package:cubitproject/Screens/Register_Screen.dart';
@@ -28,7 +29,6 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.screenRoute: (context) => LoginScreen(),
         RegisterScreen.screenRoute: (context) => RegisterScreen(),
-        // ChatScreen.screenRoute: (context) => ChatScreen(),
         HomeScreen.screenRoute: (context) =>
             HomeScreen(currentUser: _auth.currentUser!),
       },
